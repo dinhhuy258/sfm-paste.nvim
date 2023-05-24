@@ -10,7 +10,7 @@ local function _write_data_to_file(write_data_fn)
 		entry = entry.parent
 	end
 
-	input.prompt("Create file ", api.path.add_trailing(entry.path), "file", function(fpath)
+	input.prompt("Paste file ", api.path.add_trailing(entry.path), "file", function(fpath)
 		input.clear()
 		if fpath == nil or fpath == "" then
 			return
@@ -25,7 +25,7 @@ local function _write_data_to_file(write_data_fn)
 		-- create a file
 		local ok = fs.touch(fpath)
 		if not ok then
-			api.log.error("Creation of file " .. fpath .. " failed due to an error.")
+			api.log.error("Paste file " .. fpath .. " failed due to an error.")
 
 			return
 		end
@@ -71,7 +71,7 @@ function Paste:paste()
 		return
 	end
 
-	api.log.warn("Nothing to paste.")
+	api.log.warn("There is nothing to paste.")
 end
 
 return Paste
