@@ -2,22 +2,42 @@ local Paste = require("sfm.extensions.sfm-paste.paste")
 
 local MacOSPaste = {}
 
+function MacOSPaste:_has_clipboard_img()
+	local handle = io.popen("pngpaste -b 2>&1")
+	if handle == nil then
+		return false
+	end
+
+	local result = handle:read("*a")
+
+	handle:close()
+
+	-- check if the output is clipboard img
+	return string.sub(result, 1, 9) == "iVBORw0KG" -- magic png number in base64
+end
+
 function MacOSPaste:_get_clipboard()
-	local command_response = io.popen("pbpaste")
-	if command_response == nil then
+	local handle = io.popen("pbpaste")
+	if handle == nil then
 		return nil
 	end
 
-	local command_outputs = {}
-	for output in command_response:lines() do
-		table.insert(command_outputs, output)
+	local result = {}
+	for output in handle:lines() do
+		table.insert(result, output)
 	end
 
-	if vim.tbl_isempty(command_outputs) then
+	handle:close()
+
+	if vim.tbl_isempty(result) then
 		return nil
 	end
 
-	return command_outputs
+	return result
+end
+
+function MacOSPaste:_get_paste_img_cmd()
+	return "pngpaste '%s'"
 end
 
 function MacOSPaste.new()
@@ -27,7 +47,7 @@ function MacOSPaste.new()
 end
 
 function MacOSPaste:paste()
-  Paste.paste(self)
+	Paste.paste(self)
 end
 
 return MacOSPaste
