@@ -32,6 +32,15 @@ local function _write_data_to_file(write_data_fn)
 
 		-- write data to file
 		write_data_fn(fpath)
+
+		-- dispatch entry created event
+		api.event.dispatch("EntryCreated", {
+			path = fpath,
+		})
+		-- reload the explorer
+		api.explorer.reload()
+		-- focus file
+		api.navigation.focus(fpath)
 	end)
 end
 
