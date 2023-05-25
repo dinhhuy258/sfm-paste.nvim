@@ -31,6 +31,26 @@ To install the `sfm-paste` extension, you will need to have the [sfm](https://gi
 
 ## Configuration
 
+The `sfm-paste` plugin provides the following configuration options:
+
+```lua
+local default_config = {
+  mappings = {
+    paste = { "<C-v>" },
+  },
+}
+```
+
+You can override the default configuration in `load_extension` method
+
+```lua
+sfm_explorer:load_extension("sfm-paste", {
+  mappings = {
+    paste = { "<C-v>", "p" },
+  },
+})
+```
+
 ## Compatibility
 
 `sfm-paste.nvim` is currently supported on macOS only. Contributions to add support for other platforms are welcome.
