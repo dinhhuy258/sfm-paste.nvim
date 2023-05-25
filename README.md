@@ -6,7 +6,7 @@ The `sfm-paste` extension is a plugin for the [sfm](https://github.com/dinhhuy25
 
 Here is a short demonstration of the `sfm-paste` extension in action:
 
-https://github.com/dinhhuy258/sfm-paste.nvim/assets/17776979/cfcac95a-f024-45e4-94d0-1caf3c42f9f8
+https://github.com/dinhhuy258/sfm-paste.nvim/assets/17776979/716320fa-1889-4a9f-bc04-f2baa312ade9
 
 ## Prerequisites
 
